@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Menu Inicial</title>
+
+<style>
+body{
+  font-family:Arial;
+  text-align:center;
+  background:#111;
+  color:white;
+  margin-top:100px;
+}
+
+h1{
+  font-size:40px;
+  margin-bottom:50px;
+}
+
+.botao{
+  display:block;
+  width:300px;
+  margin:20px auto;
+  padding:20px;
+  font-size:25px;
+  border:none;
+  border-radius:15px;
+  cursor:pointer;
+}
+
+.humor{
+  background:#c62828;
+  color:white;
+}
+
+.piramide{
+  background:#1565c0;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<h1>SELECIONE UMA OPÇÃO</h1>
+
+<button class="botao humor" onclick="irHumor()">
+😊 Como está seu humor
+</button>
+
+<button class="botao piramide" onclick="irPiramide()">
+📋 Realizar Pirâmide
+</button>
+
+<script>
+function irHumor(){
+  window.location.href = "totem.html";
+}
+
+function irPiramide(){
+  window.location.href = "https://checklist.id-logistics.com.br/";
+}
+</script>
+
+</body>
+</html>
