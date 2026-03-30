@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<title>Totem de Humor</title>
+
+<style>
+body{
+  background:#c62828;
+  font-family:Arial;
+  text-align:center;
+  color:white;
+  margin:0;
+}
+
+h1{
+  margin-top:30px;
+  font-size:40px;
+}
+
+.container{
+  margin-top:30px;
+}
+
+input, select{
+  padding:15px;
+  font-size:20px;
+  border-radius:10px;
+  border:none;
+  margin:10px;
+}
+
+.emojis{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:50px;
+  padding:40px;
+}
+
+.card{
+  cursor:pointer;
+  transition:transform 0.2s;
+}
+
+.card:hover{
+  transform:scale(1.1);
+}
+
+.emoji{
+  font-size:100px;
+  animation:pulse 2s infinite;
+}
+
+.botao{
+  font-size:22px;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+#mensagem{
+  font-size:28px;
+  margin-top:40px;
+  padding:40px;
+  display:none;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<h1>COMO ESTÁ SEU HUMOR HOJE?</h1>
+
+<div class="container">
+
+<select id="nome">
+  <option value="">Selecione seu nome</option>
+</select>
+<br>
+
+<select id="area">
+  <option value="">Selecione a Área</option>
+  <option>Outbound</option>
+  <option>Inbound</option>
+  <option>Transfer-out</option>
+  <option>T.I</option>
+  <option>Administrativo</option>
+  <option>ICQA</option>
+  <option>C-RET</option>
+  <option>Learning</option>
+  <option>LP</option>
+  <option>TOM</option>
+  <option>INSUMOS</option>
+  <option>Facilites</option>
+  <option>RH</option>
+  <option>HSE</option>
+</select>
+
+<select id="turno">
+  <option value="">Selecione o Turno</option>
+  <option>BLUE NIGHT</option>
+  <option>BLUE DAY</option>
+  <option>RED NIGHT</option>
+  <option>RED DAY</option>
+  <option>ADM</option>
+</select>
+
+</div>
+
+<div class="emojis">
+
+<div class="card" onclick="registrar('Feliz')">
+  <div class="emoji">😀</div>
+  <button class="botao">Feliz</button>
+</div>
+
+<div class="card" onclick="registrar('Calmo')">
+  <div class="emoji">😌</div>
+  <button class="botao">Calmo</button>
+</div>
+
+<div class="card" onclick="registrar('Triste')">
+  <div class="emoji">😢</div>
+  <button class="botao">Triste</button>
+</div>
+
+<div class="card" onclick="registrar('Medo')">
+  <div class="emoji">😨</div>
+  <button class="botao">Com medo</button>
+</div>
+
+<div class="card" onclick="registrar('Preocupado')">
+  <div class="emoji">😟</div>
+  <button class="botao">Preocupado</button>
+</div>
+
+<div class="card" onclick="registrar('Raiva')">
+  <div class="emoji">😡</div>
+  <button class="botao">Com raiva</button>
+</div>
+
+<!-- NOVO -->
+<div class="card" onclick="registrar('Sonolento')">
+  <div class="emoji">😴</div>
+  <button class="botao">Sonolento</button>
+</div>
+
+</div>
+
+<div id="mensagem"></div>
+
+<script>
+
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyYPvykOpwkKNUTTS5iUvJ9_1CNTDRB4T4gLgI4E5jIZmxX6rmm9EP7SzCihG73QkqF/exec";
+
+const frases = {
+
+Feliz:[
+"Que ótimo ver você feliz hoje!",
+"Sua energia positiva faz diferença.",
+"Continue espalhando alegria!",
+"Seu entusiasmo inspira outros.",
+"Seu bom humor melhora o ambiente."
+],
+
+Calmo:[
+"A calma ajuda a tomar boas decisões.",
+"Equilíbrio é sinal de força.",
+"Respire fundo e continue.",
+"A serenidade melhora o foco.",
+"Você transmite tranquilidade."
+],
+
+Triste:[
+"Todos temos dias difíceis.",
+"Você não está sozinho.",
+"Amanhã pode ser melhor.",
+"Momentos difíceis também passam.",
+"Um dia de cada vez."
+],
+
+Medo:[
+"Respire fundo, você consegue.",
+"Você é mais forte do que pensa.",
+"Cada desafio traz aprendizado.",
+"Confie em você.",
+"Coragem também é continuar."
+],
+
+Preocupado:[
+"Respire fundo e organize os pensamentos.",
+"Um passo de cada vez.",
+"Priorize o que é importante.",
+"Você está fazendo o seu melhor.",
+"Grandes problemas se resolvem em partes."
+],
+
+Raiva:[
+"Respire fundo antes de reagir.",
+"A calma ajuda a resolver conflitos.",
+"Conte até dez e respire.",
+"Momentos difíceis passam.",
+"Controle emocional é força."
+],
+
+Sonolento:[
+"Com sono não dá para trabalhar, avise o gestor.",
+"Talvez seja hora de um café ☕.",
+"Seu corpo está pedindo descanso.",
+"Se possível, faça uma pausa rápida.",
+"Descansar também faz parte da produtividade."
+]
+
+}
+
+// Função para registrar o humor
+function registrar(humor){
+  let nome = document.getElementById("nome").value;
+  let area = document.getElementById("area").value;
+  let turno = document.getElementById("turno").value;
+
+  if(nome=="" || area=="" || turno==""){
+    alert("Preencha nome, área e turno");
+    return;
+  }
+
+  fetch(WEB_APP_URL,{
+    method:"POST",
+    body:JSON.stringify({
+      nome:nome,
+      area:area,
+      turno:turno,
+      humor:humor
+    })
+  });
+
+  let lista = frases[humor];
+  let frase = lista[Math.floor(Math.random()*lista.length)];
+
+  document.querySelector(".emojis").style.display="none";
+  document.querySelector(".container").style.display="none";
+
+  let msg=document.getElementById("mensagem");
+  msg.innerHTML="<h2>"+frase+"</h2><br><br>Obrigado pelo seu feedback!";
+  msg.style.display="block";
+
+  setTimeout(()=>{ location.reload() },4000);
+}
+
+// Função para puxar os nomes da planilha
+function carregarNomes(){
+  let area = document.getElementById("area").value;
+  let turno = document.getElementById("turno").value;
+
+  fetch(`${WEB_APP_URL}?area=${area}&turno=${turno}`)
+  .then(res => res.json())
+  .then(data => {
+    let selectNome = document.getElementById("nome");
+    selectNome.innerHTML = '<option value="">Selecione seu nome</option>';
+    data.forEach(nome => {
+      let option = document.createElement("option");
+      option.value = nome;
+      option.textContent = nome;
+      selectNome.appendChild(option);
+    });
+  });
+}
+
+document.getElementById("area").addEventListener("change", carregarNomes);
+document.getElementById("turno").addEventListener("change", carregarNomes);
+
+</script>
+
+</body>
+</html>
